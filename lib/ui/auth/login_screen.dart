@@ -8,6 +8,7 @@ import 'package:untitled1/ui/fogot_password.dart';
 import 'package:untitled1/utils/utils.dart';
 
 import '../../widgets/round_button.dart';
+import '../MainScreen.dart';
 import '../firebase_database/post_screen.dart';
 
 
@@ -46,7 +47,7 @@ class _LoginScreenState extends State<LoginScreen> {
         password: passwordController.text.toString()).then((value){
       Utils().toastMessage(value.user!.email.toString());
       Navigator.push(context,
-          MaterialPageRoute(builder: (context) => PostScreen())
+          MaterialPageRoute(builder: (context) => const mainScreen())
       );
       setState(() {
         loading = false ;
@@ -71,7 +72,7 @@ class _LoginScreenState extends State<LoginScreen> {
       child: Scaffold(
         appBar: AppBar(
           automaticallyImplyLeading: false,
-          title: Text('Login'),
+          title: const Text('Login'),
         ),
         body: Padding(
           padding: const EdgeInsets.symmetric(horizontal: 20),
@@ -132,10 +133,10 @@ class _LoginScreenState extends State<LoginScreen> {
                 child: TextButton(onPressed: (){
                   Navigator.push(context,
                       MaterialPageRoute(
-                          builder:(context) => ForgotPasswordScreen())
+                          builder:(context) => const ForgotPasswordScreen())
                   );
                 },
-                    child: Text('Forgot Password?')),
+                    child: const Text('Forgot Password?')),
               ),
               const SizedBox(height: 30,),
               Row(
@@ -145,17 +146,17 @@ class _LoginScreenState extends State<LoginScreen> {
                   TextButton(onPressed: (){
                     Navigator.push(context,
                         MaterialPageRoute(
-                            builder:(context) => SignUpScreen())
+                            builder:(context) => const SignUpScreen())
                     );
                   },
-                      child: Text('Sign up'))
+                      child: const Text('Sign up'))
                 ],
               ),
               const SizedBox(height: 30,),
               InkWell(
                 onTap: (){
                   Navigator.push(context,
-                      MaterialPageRoute(builder: (context) => LoginWithPhoneNumber()));
+                      MaterialPageRoute(builder: (context) => const LoginWithPhoneNumber()));
                 },
                 child: Container(
                   height: 50,
@@ -165,7 +166,7 @@ class _LoginScreenState extends State<LoginScreen> {
                           color: Colors.black
                       )
                   ),
-                  child: Center(
+                  child: const Center(
                     child: Text('Login with phone'),
                   ),
                 ),

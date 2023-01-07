@@ -22,29 +22,29 @@ class _LoginWithPhoneNumberState extends State<LoginWithPhoneNumber> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Login'),
+        title: const Text('Login'),
       ),
       body: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 20),
         child: Column(
           children: [
-            SizedBox(height: 80,),
+            const SizedBox(height: 80,),
 
             TextFormField(
               controller: phoneNumberController,
               keyboardType: TextInputType.number,
-              decoration: InputDecoration(
-                hintText: '+1 234 3455 234'
+              decoration: const InputDecoration(
+                hintText: '234 3455 234'
               ),
             ),
-            SizedBox(height: 80,),
+            const SizedBox(height: 80,),
             RoundButton(title: 'Login',loading: loading, onTap: (){
 
               setState(() {
                 loading = true ;
               });
               auth.verifyPhoneNumber(
-                phoneNumber: phoneNumberController.text,
+                phoneNumber: "+91${ phoneNumberController.text}",
                   verificationCompleted: (_){
                     setState(() {
                       loading = false ;

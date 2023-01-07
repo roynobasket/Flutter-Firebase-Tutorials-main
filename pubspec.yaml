@@ -41,6 +41,13 @@ dependencies:
   fluttertoast:
   firebase_database:
   image_picker:
+  flutter_tflite:
+  camera:
+  shared_preferences:
+  syncfusion_flutter_pdf:
+  pdf:
+  intl:
+  path_provider:
 
 dev_dependencies:
   flutter_test:
@@ -63,7 +70,8 @@ flutter:
   # included with your application, so that you can use the icons in
   # the material Icons class.
   uses-material-design: true
-
+  assets:
+    - assets/model/
   # To add assets to your application, add an assets section, like this:
   # assets:
   #   - images/a_dot_burr.jpeg

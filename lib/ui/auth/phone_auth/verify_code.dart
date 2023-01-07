@@ -1,5 +1,6 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:untitled1/ui/MainScreen.dart';
 import 'package:untitled1/utils/utils.dart';
 
 import '../../../widgets/round_button.dart';
@@ -54,7 +55,7 @@ class _VerifyCodeScreenState extends State<VerifyCodeScreen> {
                 
                 await auth.signInWithCredential(crendital);
                 
-                Navigator.push(context, MaterialPageRoute(builder: (context) => PostScreen()));
+                Navigator.push(context, MaterialPageRoute(builder: (context) => mainScreen()));
                 
               }catch(e){
                 setState(() {
