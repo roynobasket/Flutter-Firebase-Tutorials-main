@@ -3,7 +3,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:untitled1/ui/auth/login_screen.dart';
 
-import '../ui/firebase_database/post_screen.dart';
+// import '../ui/firebase_database/post_screen.dart';
 import '../ui/firebase_firestore/fire_store_list.dart';
 
 class SplashServices{

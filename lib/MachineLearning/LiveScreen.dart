@@ -173,12 +173,10 @@ class _HomeState extends State<liveScreen> {
 // generate report and upload into cloud
 void genpdf() {
   var pdf = pw.Document();
-
-
 }
 //status Update..........
 Future<void> updateStatus(String output) async {
-  DatabaseReference ref = FirebaseDatabase.instance.ref("temp/temp");
+  // DatabaseReference ref = FirebaseDatabase.instance.ref("temp/temp");
   if (output[0] =="0"){
     // print("Angry");
     // await ref.update({
