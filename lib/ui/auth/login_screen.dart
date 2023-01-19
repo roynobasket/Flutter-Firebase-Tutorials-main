@@ -11,31 +11,24 @@ import '../../widgets/round_button.dart';
 import '../MainScreen.dart';
 import '../firebase_database/post_screen.dart';
 
-
 class LoginScreen extends StatefulWidget {
   const LoginScreen({Key? key}) : super(key: key);
-
   @override
   State<LoginScreen> createState() => _LoginScreenState();
 }
 
 class _LoginScreenState extends State<LoginScreen> {
-
   bool loading = false ;
   final _formKey = GlobalKey<FormState>();
   final emailController = TextEditingController();
   final passwordController = TextEditingController();
-
   final _auth = FirebaseAuth.instance ;
-
-
   @override
   void dispose() {
     // TODO: implement dispose
     super.dispose();
     emailController.dispose();
     passwordController.dispose();
-
   }
 
   void login(){
@@ -60,8 +53,6 @@ class _LoginScreenState extends State<LoginScreen> {
       });
     });
   }
-
-
   @override
   Widget build(BuildContext context) {
     return WillPopScope(
@@ -73,6 +64,7 @@ class _LoginScreenState extends State<LoginScreen> {
         appBar: AppBar(
           automaticallyImplyLeading: false,
           title: const Text('Login'),
+
         ),
         body: SingleChildScrollView(
           child: Padding(
@@ -115,7 +107,6 @@ class _LoginScreenState extends State<LoginScreen> {
                             return null ;
                           },
                         ),
-
                       ],
                     )
                 ),
@@ -171,8 +162,7 @@ class _LoginScreenState extends State<LoginScreen> {
                       child: Text('Login with phone'),
                     ),
                   ),
-                )
-
+                ),
               ],
             ),
           ),

@@ -1,13 +1,9 @@
 import 'package:camera/camera.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_database/firebase_database.dart';
-// import 'package:tflite/tflite.dart';
 import 'package:flutter_tflite/flutter_tflite.dart';
-import 'package:pdf/widgets.dart' as pw;
-
 import 'package:flutter/material.dart';
-import 'package:pdf/pdf.dart';
-
+import 'package:untitled1/ui/historyScreen.dart';
 import '../main.dart';
 
 class liveScreen extends StatefulWidget {
@@ -16,7 +12,18 @@ class liveScreen extends StatefulWidget {
   @override
   _HomeState createState() => _HomeState();
 }
-var arr =[0,0,0,0,0,0,0];
+
+var arr = [0, 0, 0, 0, 0, 0, 0];
+
+/*
+0 Angry
+1 Disgust
+2 Fear
+3 Happy
+4 Neutral
+5 Sad
+6 Surprise
+*/
 class _HomeState extends State<liveScreen> {
   final databaseRef = FirebaseDatabase.instance.ref('Post');
   int cam = 0;
@@ -62,9 +69,7 @@ class _HomeState extends State<liveScreen> {
           numResults: 7,
           threshold: 0.1,
           asynch: true);
-
       output = '';
-
       for (var element in predictions!) {
         output += element['label'].toString().substring(0, 1).toUpperCase() +
             element['label'].toString().substring(1) +
@@ -74,7 +79,6 @@ class _HomeState extends State<liveScreen> {
       }
       setState(() {
         updateStatus(output);
-        output = output;
       });
     }
   }
@@ -122,6 +126,26 @@ class _HomeState extends State<liveScreen> {
             ),
           ),
         ),
+        Align(
+          alignment: Alignment.topLeft,
+          child: SizedBox(
+            height: 25.0,
+            width: 45.0,
+            child: ElevatedButton(
+              onPressed: () {
+                uploadStatus();
+                Navigator.pushReplacement(
+                    context,
+                    MaterialPageRoute(
+                        builder: (BuildContext context) => const historyScreen()));
+              },
+              // icon: const Icon(Icons.stop_circle_outlined),
+              child: const Text(
+                '🛑',
+              ),
+            ),
+          ),
+        ),
         Padding(
           padding: const EdgeInsets.all(20),
           child: Container(
@@ -130,23 +154,9 @@ class _HomeState extends State<liveScreen> {
             child: !cameraController!.value.isInitialized
                 ? Container()
                 : AspectRatio(
-              aspectRatio: cameraController!.value.aspectRatio,
-              child: CameraPreview(cameraController!),
-            ),
-          ),
-        ),
-        Container(
-          width: 100,
-          height: 90,
-          padding: const EdgeInsets.all(12),
-          alignment: Alignment.center,
-          // decoration: BoxDecoration(
-          //   color: Colors.blueAccent,
-          //   border: Border.all(color: Colors.red, width: 4.0),
-          //   borderRadius: const BorderRadius.all(Radius.circular(8.0)),
-          // ),
-          child: ElevatedButton(onPressed: () { genpdf(); },
-            child: const Text("Stop"),
+                    aspectRatio: cameraController!.value.aspectRatio,
+                    child: CameraPreview(cameraController!),
+                  ),
           ),
         ),
         Container(
@@ -155,8 +165,8 @@ class _HomeState extends State<liveScreen> {
           padding: const EdgeInsets.all(12),
           alignment: Alignment.center,
           decoration: BoxDecoration(
-            color: Colors.blueAccent,
-            border: Border.all(color: Colors.red, width: 4.0),
+            color: Colors.purple.shade300,
+            // border: Border.all(color: Colors.deepPurpleAccent, width: 4.0),
             borderRadius: const BorderRadius.all(Radius.circular(8.0)),
           ),
           child: Text(
@@ -165,64 +175,99 @@ class _HomeState extends State<liveScreen> {
             textAlign: TextAlign.center,
           ),
         ),
-
       ]),
     );
   }
 }
-// generate report and upload into cloud
-void genpdf() {
-  var pdf = pw.Document();
+
+void uploadStatus() {
+  FirebaseFirestore.instance.collection('temp').add({
+    "Angry": arr[0],
+    "Disgust": arr[1],
+    "Fear": arr[2],
+    "Happy": arr[3],
+    "Neutral": arr[4],
+    "Sad": arr[5],
+    "Surprise": arr[6]
+  });
+  arr = [0, 0, 0, 0, 0, 0, 0];
 }
+// generate report and upload into cloud
+// Future<void> genPdf() async {
+//   final pdf = pw.Document();
+//
+//   pdf.addPage(
+//     pw.Page(
+//       build: (pw.Context context) =>pw.Column(children: <pw.Widget>[
+//         _Percent(size: 60, value: .7, title: pw.Text('Word')),
+//         _Percent( size: 60, value: .4, title: pw.Text('Excel')),
+//       ]),
+//     ),
+//   );
+//   final file = File('example.pdf');
+//   await file.writeAsBytes(await pdf.save());
+// }
+//
+// // PDF ..........
+// class _Percent extends pw.StatelessWidget {
+//   _Percent({
+//     required this.size,
+//     required this.value,
+//     required this.title,
+//   });
+//   final double size;
+//   final double value;
+//   final pw.Widget title;
+//   static const fontSize = 1.2;
+//   PdfColor get color => PdfColors.green;
+//   static const backgroundColor = PdfColors.grey300;
+//   static const strokeWidth = 5.0;
+//   @override
+//   pw.Widget build(pw.Context context) {
+//     final widgets = <pw.Widget>[
+//       pw.Container(
+//         width: size,
+//         height: size,
+//         child: pw.Stack(
+//           alignment: pw.Alignment.center,
+//           fit: pw.StackFit.expand,
+//           children: <pw.Widget>[
+//             pw.Center(
+//               child: pw.Text(
+//                 '${(value * 100).round().toInt()}%',
+//                 textScaleFactor: fontSize,
+//               ),
+//             ),
+//             pw.CircularProgressIndicator(
+//               value: value,
+//               backgroundColor: backgroundColor,
+//               color: color,
+//               strokeWidth: strokeWidth,
+//             ),
+//           ],
+//         ),
+//       )
+//     ];
+//     widgets.add(title);
+//     return pw.Column(children: widgets);
+//   }
+// }
+
 //status Update..........
 Future<void> updateStatus(String output) async {
-  // DatabaseReference ref = FirebaseDatabase.instance.ref("temp/temp");
-  if (output[0] =="0"){
-    // print("Angry");
-    // await ref.update({
-    //   "Angry": 1,
-    // });
-    arr[0]= arr[0]+1;
-  }
-  else if (output[0] =="1"){
-    // print("Disgust");
-    // await ref.update({
-    //   "Disgust": 1,
-    // });
-    arr[0]= arr[0]+1;
-  }
-  else if (output[0] =="2"){
-    // print("Fear");
-    // await ref.update({
-    //   "Fear": 1,
-    // });
-    arr[0]= arr[0]+1;
-  }
-  else if (output[0] =="3"){
-    // print("Happy");
-    // await ref.update({
-    //   "Happy": FieldValue.increment(1),
-    // });
-    arr[0]= arr[0]+1;
-  }
-  else if (output[0] =="4"){
-    // await ref.update({
-    //   "Neutral": FieldValue.increment(1),
-    // });
-    arr[0]= arr[0]+1;
-  }
-  else if (output[0] =="5"){
-    // await ref.update({
-    //   "Sad": FieldValue.increment(1),
-    // });
-    arr[0]= arr[0]+1;
-  }
-  else if (output[0] =="6"){
-    // await ref.update({
-    //   "Surprise": FieldValue.increment(1),
-    // });
-    arr[0]= arr[0]+1;
+  if (output[0] == "0") {
+    arr[0]++;
+  } else if (output[0] == "1") {
+    arr[1]++;
+  } else if (output[0] == "2") {
+    arr[2]++;
+  } else if (output[0] == "3") {
+    arr[3]++;
+  } else if (output[0] == "4") {
+    arr[4]++;
+  } else if (output[0] == "5") {
+    arr[5]++;
+  } else {
+    arr[6]++;
   }
 }
-
-
