@@ -1,6 +1,6 @@
 import 'package:camera/camera.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:firebase_database/firebase_database.dart';
+// import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter_tflite/flutter_tflite.dart';
 import 'package:flutter/material.dart';
 import 'package:untitled1/ui/historyScreen.dart';
@@ -25,7 +25,7 @@ var arr = [0, 0, 0, 0, 0, 0, 0];
 6 Surprise
 */
 class _HomeState extends State<liveScreen> {
-  final databaseRef = FirebaseDatabase.instance.ref('Post');
+  // final databaseRef = FirebaseDatabase.instance.ref('Post');
   int cam = 0;
 
   CameraImage? cameraImage;
@@ -137,7 +137,8 @@ class _HomeState extends State<liveScreen> {
                 Navigator.pushReplacement(
                     context,
                     MaterialPageRoute(
-                        builder: (BuildContext context) => const historyScreen()));
+                        builder: (BuildContext context) =>
+                            const historyScreen()));
               },
               // icon: const Icon(Icons.stop_circle_outlined),
               child: const Text(
@@ -192,82 +193,27 @@ void uploadStatus() {
   });
   arr = [0, 0, 0, 0, 0, 0, 0];
 }
-// generate report and upload into cloud
-// Future<void> genPdf() async {
-//   final pdf = pw.Document();
-//
-//   pdf.addPage(
-//     pw.Page(
-//       build: (pw.Context context) =>pw.Column(children: <pw.Widget>[
-//         _Percent(size: 60, value: .7, title: pw.Text('Word')),
-//         _Percent( size: 60, value: .4, title: pw.Text('Excel')),
-//       ]),
-//     ),
-//   );
-//   final file = File('example.pdf');
-//   await file.writeAsBytes(await pdf.save());
-// }
-//
-// // PDF ..........
-// class _Percent extends pw.StatelessWidget {
-//   _Percent({
-//     required this.size,
-//     required this.value,
-//     required this.title,
-//   });
-//   final double size;
-//   final double value;
-//   final pw.Widget title;
-//   static const fontSize = 1.2;
-//   PdfColor get color => PdfColors.green;
-//   static const backgroundColor = PdfColors.grey300;
-//   static const strokeWidth = 5.0;
-//   @override
-//   pw.Widget build(pw.Context context) {
-//     final widgets = <pw.Widget>[
-//       pw.Container(
-//         width: size,
-//         height: size,
-//         child: pw.Stack(
-//           alignment: pw.Alignment.center,
-//           fit: pw.StackFit.expand,
-//           children: <pw.Widget>[
-//             pw.Center(
-//               child: pw.Text(
-//                 '${(value * 100).round().toInt()}%',
-//                 textScaleFactor: fontSize,
-//               ),
-//             ),
-//             pw.CircularProgressIndicator(
-//               value: value,
-//               backgroundColor: backgroundColor,
-//               color: color,
-//               strokeWidth: strokeWidth,
-//             ),
-//           ],
-//         ),
-//       )
-//     ];
-//     widgets.add(title);
-//     return pw.Column(children: widgets);
-//   }
-// }
 
-//status Update..........
 Future<void> updateStatus(String output) async {
   if (output[0] == "0") {
     arr[0]++;
-  } else if (output[0] == "1") {
+  }
+  else if (output[0] == "1") {
     arr[1]++;
-  } else if (output[0] == "2") {
+  }
+  else if (output[0] == "2") {
     arr[2]++;
-  } else if (output[0] == "3") {
+  }
+  else if (output[0] == "3") {
     arr[3]++;
-  } else if (output[0] == "4") {
+  }
+  else if (output[0] == "4") {
     arr[4]++;
-  } else if (output[0] == "5") {
+  }
+  else if (output[0] == "5") {
     arr[5]++;
-  } else {
+  }
+  else {
     arr[6]++;
   }
 }

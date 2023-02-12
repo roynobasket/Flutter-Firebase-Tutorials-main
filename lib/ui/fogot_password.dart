@@ -20,7 +20,7 @@ class _ForgotPasswordScreenState extends State<ForgotPasswordScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Forgot Password'),
+        title: const Text('Forgot Password'),
       ),
       body: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 20),
@@ -31,11 +31,11 @@ class _ForgotPasswordScreenState extends State<ForgotPasswordScreen> {
 
             TextFormField(
               controller: emailController,
-              decoration: InputDecoration(
+              decoration: const InputDecoration(
                   hintText: 'Email'
               ),
             ),
-            SizedBox(height: 40,),
+            const SizedBox(height: 40,),
             RoundButton(title: 'Forgot', onTap: (){
               auth.sendPasswordResetEmail(email: emailController.text.toString()).then((value){
                 Utils().toastMessage('We have sent you email to recover password, please check email');

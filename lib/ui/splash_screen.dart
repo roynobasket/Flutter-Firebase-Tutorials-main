@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:untitled1/firebase_services/splash_services.dart';
 
-
-
 class SplashScreen extends StatefulWidget {
   const SplashScreen({Key? key}) : super(key: key);
 
@@ -11,7 +9,6 @@ class SplashScreen extends StatefulWidget {
 }
 
 class _SplashScreenState extends State<SplashScreen> {
-
   SplashServices splashScreen = SplashServices();
 
   @override
@@ -20,11 +17,28 @@ class _SplashScreenState extends State<SplashScreen> {
     super.initState();
     splashScreen.isLogin(context);
   }
+
   @override
   Widget build(BuildContext context) {
-    return const Scaffold(
+    return Scaffold(
       body: Center(
-        child: Text('Firebase Tutorials' , style: TextStyle(fontSize: 30),),
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: const [
+            Text(
+              'Expression Detection ',
+              style: TextStyle(fontSize: 18,),
+            ),
+            Text(
+              'and ',
+              style: TextStyle(fontSize: 18),
+            ),
+            Text(
+              'Suggestion Application',
+              style: TextStyle(fontSize: 18),
+            ),
+          ],
+        ),
       ),
     );
   }

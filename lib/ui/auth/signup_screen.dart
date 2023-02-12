@@ -1,4 +1,4 @@
-import 'package:firebase_core/firebase_core.dart';
+// import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:untitled1/ui/auth/login_screen.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -30,49 +30,29 @@ class _SignUpScreenState extends State<SignUpScreen> {
     passwordController.dispose();
 
   }
-
-
   void signUp(){
     setState(() {
       loading = true ;
     });
-
-
-
-    // _auth.sendSignInLinkToEmail(
-    //   email: emailController.text.toString(),
-    //   actionCodeSettings: ActionCodeSettings(
-    //     url: 'https://flutterauth.page.link/',
-    //     handleCodeInApp: true,
-    //     iOSBundleId: 'com.techease.dumy',
-    //     androidPackageName: 'com.techease.dumy',
-    //     androidMinimumVersion: "1",
-    //   ),
-    //
-    // ).then((value){
-    // }).onError((error, stackTrace){
-    //   print(error.toString());
-    // });
-
-    // _auth.createUserWithEmailAndPassword(
-    //     email: emailController.text.toString(),
-    //     password: passwordController.text.toString()).then((value){
-    //   setState(() {
-    //     loading = false ;
-    //   });
-    // }).onError((error, stackTrace){
-    //   Utils().toastMessage(error.toString());
-    //   setState(() {
-    //     loading = false ;
-    //   });
-    // });
+    _auth.createUserWithEmailAndPassword(
+        email: emailController.text.toString(),
+        password: passwordController.text.toString()).then((value){
+      setState(() {
+        loading = false ;
+      });
+    }).onError((error, stackTrace){
+      Utils().toastMessage(error.toString());
+      setState(() {
+        loading = false ;
+      });
+    });
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Sign up'),
+        title: const Text('Sign up'),
       ),
       body: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 20),
@@ -132,14 +112,14 @@ class _SignUpScreenState extends State<SignUpScreen> {
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                Text("Already have an account?"),
+                const Text("Already have an account?"),
                 TextButton(onPressed: (){
                   Navigator.push(context,
                       MaterialPageRoute(
-                          builder:(context) => LoginScreen())
+                          builder:(context) => const LoginScreen())
                   );
                 },
-                    child: Text('Login'))
+                    child: const Text('Login'))
               ],
             )
 

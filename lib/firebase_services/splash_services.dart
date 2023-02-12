@@ -1,10 +1,11 @@
 import 'dart:async';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:untitled1/ui/MainScreen.dart';
 import 'package:untitled1/ui/auth/login_screen.dart';
 
 // import '../ui/firebase_database/post_screen.dart';
-import '../ui/firebase_firestore/fire_store_list.dart';
+// import '../ui/firebase_firestore/fire_store_list.dart';
 
 class SplashServices{
 
@@ -16,11 +17,11 @@ class SplashServices{
 
     if(user != null){
       Timer(const Duration(seconds: 3),
-              ()=> Navigator.push(context, MaterialPageRoute(builder: (context) => ShowFireStorePostScreen()))
+              ()=> Navigator.push(context, MaterialPageRoute(builder: (context) => const mainScreen()))
       );
     }else {
       Timer(const Duration(seconds: 3),
-              ()=> Navigator.push(context, MaterialPageRoute(builder: (context) => LoginScreen()))
+              ()=> Navigator.push(context, MaterialPageRoute(builder: (context) => const LoginScreen()))
       );
     }
 
